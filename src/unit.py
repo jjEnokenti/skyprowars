@@ -56,7 +56,10 @@ class BaseUnit(ABC):
 
     def get_damage(self, damage: int) -> Optional[int]:
         if damage > 0:
-            self.hp -= damage
+            if self.hp - damage < 0:
+                self.hp = 0
+            else:
+                self.hp -= damage
         return damage
 
     @abstractmethod
